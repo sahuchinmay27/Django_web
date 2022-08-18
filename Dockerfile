@@ -4,13 +4,16 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /mysite
-COPY requirments.txt /requirments.txt
+COPY requirments.txt /mysite/
 
 RUN pip install -r requirments.txt
 
-COPY --chown=:djuser requirements.txt requirements.txt
+#COPY --chown=:djuser requirements.txt requirements.txt
 
-COPY .mysite /mysite/
+COPY . /mysite/
 
+EXPOSE 8000
+
+CMD [ "python", "manage.py", "runserver", ]
 
 
